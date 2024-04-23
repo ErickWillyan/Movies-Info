@@ -1,9 +1,15 @@
 .cardImage {
-  max-height: 400px;
-  max-width: 200px;
+  width: 200px;
+  margin: 20px;
 }
+
+.cardImage p {
+  margin-top: 5px;
+  text-align: center;
+  font-weight: 500;
+}
+
 .cardImage img {
-  max-height: 400px;
-  max-width: 200px;
-  object-fit: contain;
+  height: 300px;
+  width: 200px;
 }
