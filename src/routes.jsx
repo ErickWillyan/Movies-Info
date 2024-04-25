@@ -8,14 +8,16 @@ import Header from "./components/Header";
 
 function RoutesApp() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/movie/:id" element={<DetailMovie />} />
-        <Route path="/favorite" element={<Favorites />} />
-      </Routes>
-    </BrowserRouter>
+    <div className="bg-background">
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/movie/:id" element={<DetailMovie />} />
+          <Route path="/favorite" element={<Favorites />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

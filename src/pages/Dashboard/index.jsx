@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import CardMovie from "../../components/cardMovie";
-import "./index.css";
+// import "./index.css";
 export default function Dashboard() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -28,8 +28,8 @@ export default function Dashboard() {
     );
   }
   return (
-    <main className="mainContainer">
-      <div className="listMoviesContainer">
+    <main className="flex justify-center w-full">
+      <div className="flex justify-center w-90% flex-wrap mt-10 w-full ">
         {movies.map((data) => {
           return <CardMovie key={data.id} data={data} />;
         })}
