@@ -10,11 +10,11 @@ export default function CardMovie({ data }) {
   };
   return (
     <div
-      className="w-48 flex flex-wrap mr-8 ml-8 mb-8 "
+      className="w-48 flex  flex-wrap ml-8 mr-8 mb-4  transition ease-in-out duration-300  hover:border-4 border-gray-300"
       onClick={handleNavigation}
     >
-      <img className="h-64 w-48" src={urlImage} alt={data.title} />
-      <p className="text-white mt-2">{data.title}</p>
+      <img className="h-72 w-48 mb-1" src={urlImage} alt={data.title} />
+      <p className="text-white pl-2">{data.title}</p>
     </div>
   );
 }
