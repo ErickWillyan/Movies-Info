@@ -28,8 +28,11 @@ export default function Dashboard() {
     );
   }
   return (
-    <main className="flex justify-center w-full">
-      <div className="flex justify-center w-90% flex-wrap mt-10 w-full ">
+    <main className=" justify-center w-full">
+      <select>
+        <option value="a">Filmes populares</option>
+      </select>
+      <div className="flex justify-center w-90% flex-wrap mt-10 mr-auto ml-auto  ">
         {movies.map((data) => {
           return <CardMovie key={data.id} data={data} />;
         })}

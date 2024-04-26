@@ -8,7 +8,6 @@ import Header from "./components/Header";
 
 function RoutesApp() {
   return (
-    <div className="bg-background">
       <BrowserRouter>
         <Header />
         <Routes>
@@ -17,7 +16,6 @@ function RoutesApp() {
           <Route path="/favorite" element={<Favorites />} />
         </Routes>
       </BrowserRouter>
-    </div>
   );
 }
 
