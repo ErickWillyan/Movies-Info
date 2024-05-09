@@ -51,11 +51,23 @@ export default function DetailMovie() {
 
   return (
     <>
-      <img src={urlImage} alt={movie.title} width={"100%"} />
-      <p>Nome do filme: {movie.title} </p>
-      <p>Sinopse do filme: {movie.overview} </p>
-      <button> Saiba Mais</button>
-      <button onClick={saveMovie}> + Adicionar a lista</button>
+      <div className=" relative flex flex-wrap w-full  bg-slate-200">
+        <img
+          src={urlImage}
+          alt={movie.title}
+          className=" w-full xl:h-[28rem] object-cover "
+        />
+        <div className="absolute w-full flex bg-gradient-to-tr h-full from-background from-10% items-end ">
+          <div className="w-[28rem]">
+            <p className="text-xl">{movie.title} </p>
+            <p className="text-base">{movie.overview} </p>
+            <div className="flex w-full justify-around">
+              <button> Saiba Mais</button>
+              <button onClick={saveMovie}> + Adicionar a lista</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

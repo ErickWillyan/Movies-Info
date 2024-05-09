@@ -9,24 +9,16 @@ export default function CardMovie({ data }) {
   };
   return (
     <div
-      //   className="w-48 flex  flex-wrap ml-8 mr-8 mb-4  transition ease-in-out duration-300  hover:border-4 border-gray-300"
-      //   onClick={handleNavigation}
-      // >
-      //   <img className="h-72 w-48 mb-1" src={urlImage} alt={data.title} />
-      //   <p className="text-white pl-2">{data.title}</p>
-      className="group relative flex h-64 w-48  mr-8 ml-8 mb-8 hover:scale-110 duration-500  "
+      className="group relative rounded-lg flex h-[17rem] w-48  mr-8 ml-8 mb-8 hover:scale-110 duration-500 delay-200  "
       onClick={handleNavigation}
     >
       <img
-        className="h-64 w-48 rounded-lg object-fill"
+        className="h-full rounded-lg w-full object-fill"
         src={urlImage}
         alt={data.title}
       />
-      <div className=" flex h-full w-full absolute items-end ">
-        <p
-          className=" opacity-0 group-hover:opacity-100 duration-500  
-       text-white font-normal text-sm absolute  text-wrap bg-gradient-to-r from-background"
-        >
+      <div className="opacity-0 rounded-lg group-hover:opacity-100 duration-500 delay-100  bg-gradient-to-tr from-background flex h-full w-full absolute  items-end">
+        <p className="p-2 text-white font-normal text-sm absolute  text-wrap ">
           {data.title}
         </p>
       </div>
