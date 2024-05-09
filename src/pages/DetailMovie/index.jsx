@@ -55,16 +55,26 @@ export default function DetailMovie() {
         <img
           src={urlImage}
           alt={movie.title}
-          className=" w-full xl:h-[28rem] object-cover "
+          className=" w-full 2xl:h-[34rem] xl:h-[34rem] lg:h-[34rem] object-cover select-none"
         />
-        <div className="absolute w-full flex bg-gradient-to-tr h-full from-background from-10% items-end ">
-          <div className="w-[28rem]">
-            <p className="text-xl">{movie.title} </p>
-            <p className="text-base">{movie.overview} </p>
-            <div className="flex w-full justify-around">
-              <button> Saiba Mais</button>
-              <button onClick={saveMovie}> + Adicionar a lista</button>
+        <div className="absolute w-full flex bg-gradient-to-tr h-full from-background from-10% items-center ">
+          <div className="ml-8 w-[40rem]">
+            <p className="text-5xl font-normal mb-7 ml-1 select-none">
+              {movie.title}
+            </p>
+            <p className="text-base mb-5 select-none">{movie.overview} </p>
+            <div className="">
+              <button className="pl-4 pr-4 pt-1 pb-1 font-bold select-nonetext-base rounded bg-whitetext-background ">
+                Saiba Mais
+              </button>
+              <button
+                onClick={saveMovie}
+                className="ml-2 p-1 text-lg select-none"
+              >
+                + Adicionar a lista
+              </button>
             </div>
+            <div></div>
           </div>
         </div>
       </div>
