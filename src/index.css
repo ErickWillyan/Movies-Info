@@ -6,6 +6,10 @@
   color: white
 }
 
+body{
+  background-color: #09090B;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
