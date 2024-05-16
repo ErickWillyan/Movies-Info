@@ -1,9 +1,11 @@
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CertificationCard from "../../components/CertificationCard";
 
 export default function DetailMovie() {
   const [movie, setMovie] = useState({});
+  const [certification, setCertification] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   useEffect(() => {
@@ -14,7 +16,16 @@ export default function DetailMovie() {
           language: "pt-BR",
         },
       });
+      const certification = await api.get(`movie/${id}/release_dates`, {
+        params: {
+          api_key: "92a609de3abd6ca612a59c98882f521b",
+        },
+      });
 
+      const classificação_Indicativa = certification.data.results.find(
+        (result) => result.iso_3166_1 === "BR"
+      );
+      setCertification(classificação_Indicativa.release_dates[0].certification);
       setMovie(response.data);
       setLoading(false);
     }
@@ -55,27 +66,27 @@ export default function DetailMovie() {
         <img
           src={urlImage}
           alt={movie.title}
-          className=" w-full 2xl:h-[34rem] xl:h-[34rem] lg:h-[34rem] object-cover select-none"
+          className="2xl:h-[34rem] xl:h-[25rem] lg:h-[25rem] md:h-[20rem] w-full object-cover select-none"
         />
-        <div className="absolute w-full flex bg-gradient-to-tr h-full from-background from-10% items-center ">
-          <div className="ml-8 w-[40rem]">
-            <p className="text-5xl font-normal mb-7 ml-1 select-none">
+        <div className="absolute w-full flex justify-between bg-gradient-to-tr h-full from-background from-10% items-center ">
+          <div className="ml-8 2xl:w-[40rem] md:w-[60rem]">
+            <p className="2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-1 select-none">
               {movie.title}
             </p>
             <p className="text-base mb-5 select-none">{movie.overview} </p>
             <div className="">
-              <button className="pl-4 pr-4 pt-1 pb-1 font-bold select-nonetext-base rounded bg-whitetext-background ">
+              <button className="2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background ">
                 Saiba Mais
               </button>
               <button
                 onClick={saveMovie}
-                className="ml-2 p-1 text-lg select-none"
+                className="ml-2 p-1 2xl:text-lg md:text-base select-none"
               >
                 + Adicionar a lista
               </button>
             </div>
-            <div></div>
           </div>
+          <div>{<CertificationCard data={certification} />} </div>
         </div>
       </div>
     </>
