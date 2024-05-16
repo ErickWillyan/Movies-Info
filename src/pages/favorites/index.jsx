@@ -34,7 +34,6 @@ export default function Favorites() {
     );
   }
 
-  console.log(movies);
 
   return (
     <div>

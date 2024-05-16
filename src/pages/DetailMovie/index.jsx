@@ -21,11 +21,16 @@ export default function DetailMovie() {
           api_key: "92a609de3abd6ca612a59c98882f521b",
         },
       });
-
-      const classificação_Indicativa = certification.data.results.find(
-        (result) => result.iso_3166_1 === "BR"
-      );
-      setCertification(classificação_Indicativa.release_dates[0].certification);
+      try {
+        const classificacao_Indicativa = certification.data.results.find(
+          (result) => result.iso_3166_1 === "BR" 
+        );
+        
+        setCertification(classificacao_Indicativa.release_dates[0].certification);
+      } catch (error) {
+        setCertification({})
+      }
+      
       setMovie(response.data);
       setLoading(false);
     }
@@ -59,6 +64,8 @@ export default function DetailMovie() {
     localStorage.setItem("@favoritesMovies", JSON.stringify(moviesSaved));
     alert("Filme Salvo");
   }
+  console.log("A classificação indicativa", certification)
+
 
   return (
     <>

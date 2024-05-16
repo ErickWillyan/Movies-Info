@@ -1,7 +1,6 @@
 import CardIndication from "./cardIndication";
 
 export default function certificationCard(certification) {
-  console.log(certification.data);
   switch (certification.data) {
     case "L":
       return (
@@ -24,7 +23,7 @@ export default function certificationCard(certification) {
       return (
         <CardIndication
           certification="12"
-          color="#F8F748"
+          color="#EBB828"
           texto="Maiores de 12 anos"
         />
       );
@@ -54,6 +53,12 @@ export default function certificationCard(certification) {
         />
       );
     default:
-      return;
+      return (
+        <CardIndication
+          certification="x"
+          color="#000000"
+          texto="Classicação não informada"
+        />
+      );
   }
 }
