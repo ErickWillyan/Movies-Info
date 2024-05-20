@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./index.css";
 
 export default function Favorites() {
   const [movies, setMovies] = useState([]);
@@ -34,13 +33,12 @@ export default function Favorites() {
     );
   }
 
-
   return (
     <div>
       <ul>
         {movies.map((item) => {
           return (
-            <div className="movieItem" key={item.id}>
+            <div className="" key={item.id}>
               <li onClick={() => navigateToDetailMovie(item.id)}>
                 <p>{item.title}</p>
               </li>

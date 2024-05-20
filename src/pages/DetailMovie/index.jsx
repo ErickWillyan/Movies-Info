@@ -5,11 +5,13 @@ import CertificationCard from "../../components/CertificationCard";
 
 export default function DetailMovie() {
   const [movie, setMovie] = useState({});
+  const [favoriteMovies, setFavoritesMovies] = useState({});
   const [certification, setCertification] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
   useEffect(() => {
     async function getDetailMovies() {
+      const favoriteList = localStorage.getItem("@favoritesMovies");
       const response = await api.get(`movie/${id}`, {
         params: {
           api_key: "92a609de3abd6ca612a59c98882f521b",
@@ -23,14 +25,17 @@ export default function DetailMovie() {
       });
       try {
         const classificacao_Indicativa = certification.data.results.find(
-          (result) => result.iso_3166_1 === "BR" 
+          (result) => result.iso_3166_1 === "BR"
         );
-        
-        setCertification(classificacao_Indicativa.release_dates[0].certification);
+
+        setCertification(
+          classificacao_Indicativa.release_dates[0].certification
+        );
       } catch (error) {
-        setCertification({})
+        setCertification({});
       }
-      
+
+      setFavoritesMovies(JSON.parse(favoriteList) || []);
       setMovie(response.data);
       setLoading(false);
     }
@@ -64,8 +69,6 @@ export default function DetailMovie() {
     localStorage.setItem("@favoritesMovies", JSON.stringify(moviesSaved));
     alert("Filme Salvo");
   }
-  console.log("A classificação indicativa", certification)
-
 
   return (
     <>
@@ -75,9 +78,9 @@ export default function DetailMovie() {
           alt={movie.title}
           className="2xl:h-[34rem] xl:h-[25rem] lg:h-[25rem] md:h-[20rem] w-full object-cover select-none"
         />
-        <div className="absolute w-full flex justify-between bg-gradient-to-tr h-full from-background from-10% items-center ">
-          <div className="ml-8 2xl:w-[40rem] md:w-[60rem]">
-            <p className="2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-1 select-none">
+        <div className="absolute w-full flex flex-wrap justify-between bg-gradient-to-tr h-full from-background from-10% items-center ">
+          <div className="ml-8 w-[60rem] lg:w-[40rem]">
+            <p className="2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-1 font-bold select-none">
               {movie.title}
             </p>
             <p className="text-base mb-5 select-none">{movie.overview} </p>
@@ -93,8 +96,13 @@ export default function DetailMovie() {
               </button>
             </div>
           </div>
-          <div>{<CertificationCard data={certification} />} </div>
+          {<CertificationCard data={certification} />}
         </div>
+      </div>
+      <div>
+        {favoriteMovies.map((item) => (
+          <p key={item.id}>{item.title}</p>
+        ))}
       </div>
     </>
   );

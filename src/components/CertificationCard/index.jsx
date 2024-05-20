@@ -55,7 +55,7 @@ export default function certificationCard(certification) {
     default:
       return (
         <CardIndication
-          certification="x"
+          certification="X"
           color="#000000"
           texto="Classicação não informada"
         />
