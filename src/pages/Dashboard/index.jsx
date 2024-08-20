@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import CardMovie from "../../components/cardMovie";
+import CardMovieDashboard from "../../components/cardMovieDashboard";
 import Header from "../../components/Header";
 export default function Dashboard() {
   const [movies, setMovies] = useState([]);
@@ -63,9 +63,9 @@ export default function Dashboard() {
             </option>
           </select>
         </div>
-        <div className="flex justify-center w-90% flex-wrap mt-4 mr-auto ml-auto  ">
+        <div className="flex max-w-[1440px] justify-center w-90% flex-wrap mt-4 mr-auto ml-auto">
           {movies.map((data) => {
-            return <CardMovie key={data.id} data={data} />;
+            return <CardMovieDashboard key={data.id} data={data} />;
           })}
         </div>
       </main>

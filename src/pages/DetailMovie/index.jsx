@@ -2,6 +2,13 @@ import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CertificationCard from "../../components/CertificationCard";
+import CardMovieMyList from "../../components/CardMovieMyList";
+import { Navigation, Pagination, Scrollbar, Zoom } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/zoom";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function DetailMovie() {
   const [movie, setMovie] = useState({});
@@ -72,7 +79,10 @@ export default function DetailMovie() {
 
   return (
     <>
-      <div className=" relative flex flex-wrap w-full  bg-slate-200">
+      <div
+        className="
+       relative flex flex-wrap w-full  bg-slate-200"
+      >
         <img
           src={urlImage}
           alt={movie.title}
@@ -99,11 +109,23 @@ export default function DetailMovie() {
           {<CertificationCard data={certification} />}
         </div>
       </div>
-      <div>
+      <Swiper
+        className="h-[20rem] flex mb-6"
+        style={{
+          "--swiper-navigation-color": "#fff",
+          "--swiper-pagination-color": "#fff",
+        }}
+        slidesPerView={5}
+        modules={[Navigation, Pagination, Scrollbar, Zoom]}
+        zoom={true}
+        navigation
+      >
         {favoriteMovies.map((item) => (
-          <p key={item.id}>{item.title}</p>
+          <SwiperSlide key={item.id} className="flex justify-center">
+            <CardMovieMyList data={item} />
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </>
   );
 }

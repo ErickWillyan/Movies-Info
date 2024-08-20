@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
-export default function CardMovie({ data }) {
+export default function CardMovieDashboard({ data }) {
   const urlImage = `https://image.tmdb.org/t/p/original/${data.poster_path}`;
   const navigate = useNavigate();
   const handleNavigation = () => {
@@ -9,7 +9,7 @@ export default function CardMovie({ data }) {
   };
   return (
     <div
-      className="group relative rounded-lg flex h-[17rem] w-48  mr-8 ml-8 mb-8 hover:scale-110 duration-500 delay-200  "
+      className="group relative rounded-lg flex h-[17rem] w-48  mr-8 ml-8 mb-8 hover:scale-110 duration-500 delay-200 "
       onClick={handleNavigation}
     >
       <img
@@ -26,7 +26,7 @@ export default function CardMovie({ data }) {
   );
 }
 
-CardMovie.propTypes = {
+CardMovieDashboard.propTypes = {
   data: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
