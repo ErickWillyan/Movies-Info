@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="flex text-white items-center justify-between pl-10 pr-10 pt-4 pb-4">
+    <header className=" flex text-white items-center justify-between px-10 py-4">
       <Link className="text-2xl font-semibold" to="/">
         Movies Info
       </Link>

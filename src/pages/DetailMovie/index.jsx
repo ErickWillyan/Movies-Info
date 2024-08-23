@@ -12,6 +12,7 @@ import "swiper/css";
 import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Header from "../../components/Header";
 
 export default function DetailMovie() {
   const navigate = useNavigate();
@@ -83,9 +84,9 @@ export default function DetailMovie() {
 
   return (
     <>
+      <Header />
       <div
-        className="
-       relative flex flex-wrap w-full  bg-slate-200"
+        className="relative flex flex-wrap w-full  bg-slate-200"
       >
 
         <img
@@ -94,18 +95,18 @@ export default function DetailMovie() {
           className="  2xl:h-[34rem] xl:h-[25rem] lg:h-[25rem] md:h-[20rem] w-full object-cover select-none"
         />
         <div className="absolute w-full flex flex-wrap justify-between bg-gradient-to-tr h-full from-background from-10% items-center ">
-          <div onClick={() => {
-            navigate("/")
-          }} className=" flex hover:scale-105 duration-500 delay-200 ml-5 py-2 w-[10rem] items-center cursor-pointer">
-            <p className="mr-2"><MdOutlineArrowBackIos size={25} /></p>
-            <p className="">Voltar</p>
-          </div>
-          <div className="ml-8 w-[60rem] lg:w-[40rem]">
-            <p className=" font-poppins 2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-1 font-bold select-none">
+          <div className=" w-[60rem] lg:w-[40rem]">
+            {/* <div onClick={() => {
+              navigate("/")
+            }} className=" flex hover:scale-105 duration-500 delay-200 ml-5 py-2 w-[10rem] items-center cursor-pointer">
+              <p className="mr-2"><MdOutlineArrowBackIos size={25} /></p>
+              <p className="">Voltar</p>
+            </div> */}
+            <p className=" font-poppins 2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-10 font-bold select-none">
               {movie.title}
             </p>
-            <p className=" font-poppins text-base mb-5 select-none">{movie.overview} </p>
-            <div className="">
+            <p className=" font-poppins text-base mb-5 select-none ml-8">{movie.overview} </p>
+            <div className="ml-8">
               <button className=" font-poppins 2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background ">
                 Saiba Mais
               </button>
