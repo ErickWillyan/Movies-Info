@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import CardMovieDashboard from "../../components/cardMovieDashboard";
 import Header from "../../components/Header";
+
 export default function Dashboard() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);

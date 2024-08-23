@@ -5,12 +5,16 @@ import CertificationCard from "../../components/CertificationCard";
 import CardMovieMyList from "../../components/CardMovieMyList";
 import { Navigation, Pagination, Scrollbar, Zoom } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { MdOutlineArrowBackIos } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+
 import "swiper/css";
 import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 export default function DetailMovie() {
+  const navigate = useNavigate();
   const [movie, setMovie] = useState({});
   const [favoriteMovies, setFavoritesMovies] = useState({});
   const [certification, setCertification] = useState({});
@@ -83,24 +87,31 @@ export default function DetailMovie() {
         className="
        relative flex flex-wrap w-full  bg-slate-200"
       >
+
         <img
           src={urlImage}
           alt={movie.title}
-          className="2xl:h-[34rem] xl:h-[25rem] lg:h-[25rem] md:h-[20rem] w-full object-cover select-none"
+          className="  2xl:h-[34rem] xl:h-[25rem] lg:h-[25rem] md:h-[20rem] w-full object-cover select-none"
         />
         <div className="absolute w-full flex flex-wrap justify-between bg-gradient-to-tr h-full from-background from-10% items-center ">
+          <div onClick={() => {
+            navigate("/")
+          }} className=" flex hover:scale-105 duration-500 delay-200 ml-5 py-2 w-[10rem] items-center cursor-pointer">
+            <p className="mr-2"><MdOutlineArrowBackIos size={25} /></p>
+            <p className="">Voltar</p>
+          </div>
           <div className="ml-8 w-[60rem] lg:w-[40rem]">
-            <p className="2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-1 font-bold select-none">
+            <p className=" font-poppins 2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-1 font-bold select-none">
               {movie.title}
             </p>
-            <p className="text-base mb-5 select-none">{movie.overview} </p>
+            <p className=" font-poppins text-base mb-5 select-none">{movie.overview} </p>
             <div className="">
-              <button className="2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background ">
+              <button className=" font-poppins 2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background ">
                 Saiba Mais
               </button>
               <button
                 onClick={saveMovie}
-                className="ml-2 p-1 2xl:text-lg md:text-base select-none"
+                className=" font-poppins ml-2 p-1 2xl:text-lg md:text-base select-none"
               >
                 + Adicionar a lista
               </button>
@@ -109,23 +120,50 @@ export default function DetailMovie() {
           {<CertificationCard data={certification} />}
         </div>
       </div>
-      <Swiper
-        className="h-[20rem] flex mb-6"
-        style={{
-          "--swiper-navigation-color": "#fff",
-          "--swiper-pagination-color": "#fff",
-        }}
-        slidesPerView={5}
-        modules={[Navigation, Pagination, Scrollbar, Zoom]}
-        zoom={true}
-        navigation
-      >
-        {favoriteMovies.map((item) => (
-          <SwiperSlide key={item.id} className="flex justify-center">
-            <CardMovieMyList data={item} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      <div>
+        <p className="text-lg ml-14 font-poppins">Minha Lista</p>
+        <Swiper
+          slidesPerView={1}
+          spaceBetween={10}
+
+          breakpoints={{
+            800: {
+              slidesPerView: 3,
+              spaceBetween: 0,
+            },
+            1000: {
+              slidesPerView: 4,
+              spaceBetween: 0,
+            },
+            1200: {
+              slidesPerView: 5,
+              spaceBetween: 0,
+            },
+            1500: {
+              slidesPerView: 6,
+              spaceBetween: 0,
+            },
+            1900: {
+              slidesPerView: 7,
+              spaceBetween: 0
+            }
+          }}
+          className=" flex pt-7 items-center h-[20rem]  mb-6"
+          style={{
+            "--swiper-navigation-color": "#fff",
+            "--swiper-pagination-color": "#fff",
+          }}
+          modules={[Navigation, Pagination, Scrollbar, Zoom]}
+          zoom={true}
+          navigation
+        >
+          {favoriteMovies.map((item) => (
+            <SwiperSlide key={item.id} className="w-1 flex justify-center ">
+              <CardMovieMyList data={item} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
     </>
   );
 }

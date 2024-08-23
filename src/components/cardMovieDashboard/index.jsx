@@ -18,7 +18,7 @@ export default function CardMovieDashboard({ data }) {
         alt={data.title}
       />
       <div className="opacity-0 rounded-lg group-hover:opacity-100 duration-500 delay-100  bg-gradient-to-tr from-background flex h-full w-full absolute  items-end">
-        <p className="p-2 text-white font-normal text-sm absolute  text-wrap ">
+        <p className=" font-poppins p-2 text-white font-normal text-sm absolute  text-wrap transition ">
           {data.title}
         </p>
       </div>
