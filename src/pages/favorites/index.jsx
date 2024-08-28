@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineArrowBackIos } from "react-icons/md";
+import { RiDeleteBin2Fill } from "react-icons/ri";
+import CardMovieFavorites from "../../components/CardMovieFavorites";
+import { CgColorBucket } from "react-icons/cg";
 
 export default function Favorites() {
   const [movies, setMovies] = useState([]);
@@ -9,6 +13,10 @@ export default function Favorites() {
     const response = localStorage.getItem("@favoritesMovies");
     setMovies(JSON.parse(response) || []);
   }, []);
+
+  const handleNavigation = (id) => {
+    navigate(`/movie/${id}`);
+  };
 
   function removeMovie(id) {
     let newList = movies.filter((item) => {
@@ -21,9 +29,7 @@ export default function Favorites() {
     alert(`${id} deletado`);
   }
 
-  function navigateToDetailMovie(id) {
-    navigate(`/movie/${id}`);
-  }
+
 
   if (movies.length === 0) {
     return (
@@ -34,21 +40,33 @@ export default function Favorites() {
   }
 
   return (
-    <div>
-      <ul>
-        {movies.map((item) => {
-          return (
-            <div className="" key={item.id}>
-              <li onClick={() => navigateToDetailMovie(item.id)}>
-                <p>{item.title}</p>
-              </li>
-              <button onClick={() => removeMovie(item.id)}>
-                remover Filme
-              </button>
+    <>
+      <div onClick={() => {
+        navigate("/")
+      }} className=" flex hover:scale-105 duration-500 delay-200 ml-5 mt-5 py-2 w-[10rem] items-center cursor-pointer">
+        <p className="mr-2"><MdOutlineArrowBackIos size={25} /></p>
+        <p className="">Voltar</p>
+      </div>
+      <div className="flex max-w-[1440px] justify-center w-90% flex-wrap mt-6 mr-auto ml-auto">
+        {movies.map((item) => (
+          <div key={item.id} className="flex hover:scale-105 duration-500 delay-200">
+            <div
+              className="w-[10rem]  rounded-lg  mr-4 ml-4 mb-8 "
+              onClick={() => handleNavigation(item.id)}
+            >
+              <img className="rounded-lg" src={`https://image.tmdb.org/t/p/original/${item.poster_path}`} alt={item.title} />
+
+              <div className="mt-2 text-left">
+                <p className=" font-poppins text-[0.9rem]">{item.title}</p>
+              </div>
             </div>
-          );
-        })}
-      </ul>
-    </div>
+
+            <RiDeleteBin2Fill className="mt-52 cursor-pointer hover:scale-[1.18] duration-500 delay-200" size={20} onClick={() => removeMovie(item.id)} />
+          </div>
+        )
+        )}
+      </div>
+
+    </>
   );
 }

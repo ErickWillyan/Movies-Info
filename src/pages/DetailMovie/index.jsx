@@ -18,12 +18,21 @@ export default function DetailMovie() {
   const navigate = useNavigate();
   const [movie, setMovie] = useState({});
   const [favoriteMovies, setFavoritesMovies] = useState({});
+  const [existMovie, setExistMovie] = useState(false);
   const [certification, setCertification] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+
   useEffect(() => {
     async function getDetailMovies() {
       const favoriteList = localStorage.getItem("@favoritesMovies");
+
+      let moviesSaved = JSON.parse(favoriteList) || [];
+
+      const existsMovies = moviesSaved.some(
+        (movieFound) => movieFound.id === JSON.parse(id)
+      );
+
       const response = await api.get(`movie/${id}`, {
         params: {
           api_key: "92a609de3abd6ca612a59c98882f521b",
@@ -35,6 +44,7 @@ export default function DetailMovie() {
           api_key: "92a609de3abd6ca612a59c98882f521b",
         },
       });
+
       try {
         const classificacao_Indicativa = certification.data.results.find(
           (result) => result.iso_3166_1 === "BR"
@@ -47,10 +57,12 @@ export default function DetailMovie() {
         setCertification({});
       }
 
+      setExistMovie(existsMovies)
       setFavoritesMovies(JSON.parse(favoriteList) || []);
       setMovie(response.data);
       setLoading(false);
     }
+
     getDetailMovies();
   }, [id]);
 
@@ -63,20 +75,33 @@ export default function DetailMovie() {
     );
   }
 
+  function removeMovie() {
+    let newList = favoriteMovies.filter((item) => {
+      return item.id !== JSON.parse(id);
+    });
+
+    setFavoritesMovies(newList);
+    localStorage.setItem("@favoritesMovies", JSON.stringify(newList));
+
+    alert(`${id} deletado`);
+    setExistMovie(false)
+  }
+
   function saveMovie() {
+
     const favoritesMovie = localStorage.getItem("@favoritesMovies");
 
     let moviesSaved = JSON.parse(favoritesMovie) || [];
 
-    const existsMovies = moviesSaved.some(
-      (movieFound) => movieFound.id === movie.id
-    );
-
-    if (existsMovies) {
+    if (existMovie) {
       alert("Este filme já foi salvo");
       return;
     }
 
+    let newList = favoriteMovies.concat(movie)
+
+    setFavoritesMovies(newList)
+    setExistMovie(true)
     moviesSaved.push(movie);
     localStorage.setItem("@favoritesMovies", JSON.stringify(moviesSaved));
     alert("Filme Salvo");
@@ -96,26 +121,27 @@ export default function DetailMovie() {
         />
         <div className="absolute w-full flex flex-wrap justify-between bg-gradient-to-tr h-full from-background from-10% items-center ">
           <div className=" w-[60rem] lg:w-[40rem]">
-            {/* <div onClick={() => {
-              navigate("/")
-            }} className=" flex hover:scale-105 duration-500 delay-200 ml-5 py-2 w-[10rem] items-center cursor-pointer">
-              <p className="mr-2"><MdOutlineArrowBackIos size={25} /></p>
-              <p className="">Voltar</p>
-            </div> */}
+
             <p className=" font-poppins 2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-10 font-bold select-none">
               {movie.title}
             </p>
             <p className=" font-poppins text-base mb-5 select-none ml-8">{movie.overview} </p>
             <div className="ml-8">
-              <button className=" font-poppins 2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background ">
+              <button onClick={saveMovie} className="  hover:scale-105 duration-200 delay-200  font-poppins 2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background ">
                 Saiba Mais
               </button>
-              <button
+              {existMovie ? (<button
+                onClick={removeMovie}
+                className=" hover:scale-105 duration-200 delay-200 font-poppins ml-2 p-1 2xl:text-lg md:text-base select-none"
+              >
+                - Remover da lista
+              </button>) : (<button
                 onClick={saveMovie}
-                className=" font-poppins ml-2 p-1 2xl:text-lg md:text-base select-none"
+                className=" hover:scale-105 duration-200 delay-200 font-poppins ml-2 p-1 2xl:text-lg md:text-base select-none"
               >
                 + Adicionar a lista
-              </button>
+              </button>)}
+
             </div>
           </div>
           {<CertificationCard data={certification} />}

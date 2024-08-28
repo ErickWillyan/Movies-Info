@@ -44,7 +44,7 @@ export default function Dashboard() {
       <main className=" justify-center w-full">
         <div className="mt-5 w-[75%] mr-auto ml-auto ">
           <select
-            className="text-xl bg-transparent outline-none"
+            className="text-xl bg-transparent outline-none "
             onChange={handleSelectChange}
           >
             <option className="text-base bg-background" value="movie/popular">
@@ -64,7 +64,7 @@ export default function Dashboard() {
             </option>
           </select>
         </div>
-        <div className="flex max-w-[1440px] justify-center w-90% flex-wrap mt-4 mr-auto ml-auto">
+        <div className="flex max-w-[1440px] justify-center w-90% flex-wrap mt-6 mr-auto ml-auto">
           {movies.map((data) => {
             return <CardMovieDashboard key={data.id} data={data} />;
           })}
