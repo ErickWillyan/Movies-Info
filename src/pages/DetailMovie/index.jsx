@@ -57,7 +57,7 @@ export default function DetailMovie() {
         setCertification({});
       }
 
-      setExistMovie(existsMovies)
+      setExistMovie(existsMovies);
       setFavoritesMovies(JSON.parse(favoriteList) || []);
       setMovie(response.data);
       setLoading(false);
@@ -84,11 +84,10 @@ export default function DetailMovie() {
     localStorage.setItem("@favoritesMovies", JSON.stringify(newList));
 
     alert(`${id} deletado`);
-    setExistMovie(false)
+    setExistMovie(false);
   }
 
   function saveMovie() {
-
     const favoritesMovie = localStorage.getItem("@favoritesMovies");
 
     let moviesSaved = JSON.parse(favoritesMovie) || [];
@@ -98,10 +97,10 @@ export default function DetailMovie() {
       return;
     }
 
-    let newList = favoriteMovies.concat(movie)
+    let newList = favoriteMovies.concat(movie);
 
-    setFavoritesMovies(newList)
-    setExistMovie(true)
+    setFavoritesMovies(newList);
+    setExistMovie(true);
     moviesSaved.push(movie);
     localStorage.setItem("@favoritesMovies", JSON.stringify(moviesSaved));
     alert("Filme Salvo");
@@ -110,10 +109,7 @@ export default function DetailMovie() {
   return (
     <>
       <Header />
-      <div
-        className="relative flex flex-wrap w-full  bg-slate-200"
-      >
-
+      <div className="relative flex flex-wrap w-full  bg-slate-200">
         <img
           src={urlImage}
           alt={movie.title}
@@ -121,27 +117,34 @@ export default function DetailMovie() {
         />
         <div className="absolute w-full flex flex-wrap justify-between bg-gradient-to-tr h-full from-background from-10% items-center ">
           <div className=" w-[60rem] lg:w-[40rem]">
-
             <p className=" font-poppins 2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-10 font-bold select-none">
               {movie.title}
             </p>
-            <p className=" font-poppins text-base mb-5 select-none ml-8">{movie.overview} </p>
+            <p className=" font-poppins text-base mb-5 select-none ml-8">
+              {movie.overview}{" "}
+            </p>
             <div className="ml-8">
-              <button onClick={saveMovie} className="  hover:scale-105 duration-200 delay-200  font-poppins 2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background ">
+              <button
+                onClick={saveMovie}
+                className="  hover:scale-105 duration-200 delay-200  font-poppins 2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background "
+              >
                 Saiba Mais
               </button>
-              {existMovie ? (<button
-                onClick={removeMovie}
-                className=" hover:scale-105 duration-200 delay-200 font-poppins ml-2 p-1 2xl:text-lg md:text-base select-none"
-              >
-                - Remover da lista
-              </button>) : (<button
-                onClick={saveMovie}
-                className=" hover:scale-105 duration-200 delay-200 font-poppins ml-2 p-1 2xl:text-lg md:text-base select-none"
-              >
-                + Adicionar a lista
-              </button>)}
-
+              {existMovie ? (
+                <button
+                  onClick={removeMovie}
+                  className=" hover:scale-105 duration-200 delay-200 font-poppins ml-2 p-1 2xl:text-lg md:text-base select-none"
+                >
+                  - Remover da lista
+                </button>
+              ) : (
+                <button
+                  onClick={saveMovie}
+                  className=" hover:scale-105 duration-200 delay-200 font-poppins ml-2 p-1 2xl:text-lg md:text-base select-none"
+                >
+                  + Adicionar a lista
+                </button>
+              )}
             </div>
           </div>
           {<CertificationCard data={certification} />}
@@ -152,7 +155,6 @@ export default function DetailMovie() {
         <Swiper
           slidesPerView={1}
           spaceBetween={10}
-
           breakpoints={{
             800: {
               slidesPerView: 3,
@@ -172,8 +174,8 @@ export default function DetailMovie() {
             },
             1900: {
               slidesPerView: 7,
-              spaceBetween: 0
-            }
+              spaceBetween: 0,
+            },
           }}
           className=" flex pt-7 items-center h-[20rem]  mb-6"
           style={{
