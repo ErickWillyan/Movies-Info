@@ -5,17 +5,14 @@ import CertificationCard from "../../components/CertificationCard";
 import CardMovieMyList from "../../components/CardMovieMyList";
 import { Navigation, Pagination, Scrollbar, Zoom } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { MdOutlineArrowBackIos } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 
 import "swiper/css";
 import "swiper/css/zoom";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Header from "../../components/Header";
 
 export default function DetailMovie() {
-  const navigate = useNavigate();
   const [movie, setMovie] = useState({});
   const [favoriteMovies, setFavoritesMovies] = useState({});
   const [existMovie, setExistMovie] = useState(false);
@@ -66,6 +63,8 @@ export default function DetailMovie() {
     getDetailMovies();
   }, [id]);
 
+  const notify = () => {};
+
   const urlImage = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
   if (loading) {
     return (
@@ -103,7 +102,7 @@ export default function DetailMovie() {
     setExistMovie(true);
     moviesSaved.push(movie);
     localStorage.setItem("@favoritesMovies", JSON.stringify(moviesSaved));
-    alert("Filme Salvo");
+    addMovie();
   }
 
   return (
@@ -125,7 +124,7 @@ export default function DetailMovie() {
             </p>
             <div className="ml-8">
               <button
-                onClick={saveMovie}
+                onClick={notify}
                 className="  hover:scale-105 duration-200 delay-200  font-poppins 2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background "
               >
                 Saiba Mais
