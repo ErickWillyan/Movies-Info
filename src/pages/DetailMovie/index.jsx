@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import CertificationCard from "../../components/CertificationCard";
 import CardMovieMyList from "../../components/CardMovieMyList";
 import { Navigation, Pagination, Scrollbar, Zoom } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Header from "../../components/Header";
+import toast, { Toaster } from "react-hot-toast";
 
 import "swiper/css";
 import "swiper/css/zoom";
@@ -19,6 +21,7 @@ export default function DetailMovie() {
   const [certification, setCertification] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getDetailMovies() {
@@ -63,7 +66,15 @@ export default function DetailMovie() {
     getDetailMovies();
   }, [id]);
 
-  const notify = () => {};
+  const handleNavigationToLearnMore = () => {
+    navigate(`/learnMore/${movie.id}`);
+  };
+
+  const notifyAddMovie = () =>
+    toast.success(`${movie.title} adicionado a lista`);
+
+  const notifyRemoveMovie = () =>
+    toast.error(`${movie.title} removido da lista`);
 
   const urlImage = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
   if (loading) {
@@ -82,8 +93,8 @@ export default function DetailMovie() {
     setFavoritesMovies(newList);
     localStorage.setItem("@favoritesMovies", JSON.stringify(newList));
 
-    alert(`${id} deletado`);
     setExistMovie(false);
+    notifyRemoveMovie();
   }
 
   function saveMovie() {
@@ -102,7 +113,7 @@ export default function DetailMovie() {
     setExistMovie(true);
     moviesSaved.push(movie);
     localStorage.setItem("@favoritesMovies", JSON.stringify(moviesSaved));
-    addMovie();
+    notifyAddMovie();
   }
 
   return (
@@ -124,7 +135,7 @@ export default function DetailMovie() {
             </p>
             <div className="ml-8">
               <button
-                onClick={notify}
+                onClick={handleNavigationToLearnMore}
                 className="  hover:scale-105 duration-200 delay-200  font-poppins 2xl:pl-4 md:pl-2 2xl:pr-4 md:pr-2 pt-1 pb-1 font-bold select-none text-base rounded bg-white text-background "
               >
                 Saiba Mais
@@ -192,6 +203,7 @@ export default function DetailMovie() {
           ))}
         </Swiper>
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </>
   );
 }

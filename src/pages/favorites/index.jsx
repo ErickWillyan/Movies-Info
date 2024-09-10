@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineArrowBackIos } from "react-icons/md";
 import { RiDeleteBin2Fill } from "react-icons/ri";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Favorites() {
   const [movies, setMovies] = useState([]);
@@ -11,20 +12,21 @@ export default function Favorites() {
     const response = localStorage.getItem("@favoritesMovies");
     setMovies(JSON.parse(response) || []);
   }, []);
+  console.log(movies);
 
   const handleNavigation = (id) => {
     navigate(`/movie/${id}`);
   };
+  const notifyRemoveMovie = (name) => toast.error(`${name} removido da lista`);
 
-  function removeMovie(id) {
-    let newList = movies.filter((item) => {
-      return item.id !== id;
+  function removeMovie({ item }) {
+    let newList = movies.filter((movie) => {
+      return movie.id !== item.id;
     });
 
+    notifyRemoveMovie(item.title);
     setMovies(newList);
     localStorage.setItem("@favoritesMovies", JSON.stringify(newList));
-
-    alert(`${id} deletado`);
   }
 
   if (movies.length === 0) {
@@ -97,11 +99,12 @@ export default function Favorites() {
             <RiDeleteBin2Fill
               className="mt-52 cursor-pointer hover:scale-[1.18] duration-500 delay-200"
               size={20}
-              onClick={() => removeMovie(item.id)}
+              onClick={() => removeMovie({ item })}
             />
           </div>
         ))}
       </div>
+      <Toaster position="top-right" reverseOrder={false} />
     </>
   );
 }
