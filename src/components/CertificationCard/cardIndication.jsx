@@ -2,7 +2,7 @@ export default function CardIndication(data) {
   return (
     <div className="max-lg:w-full  flex justify-end">
       <div className="flex">
-        {data.texto == "L" || data.texto == "X" ? (
+        {data.texto == "L" ? (
           <p
             className="flex flex-none items-center h-10 px-1 rounded-s-md font-bold select-none"
             style={{ backgroundColor: `${data.color}` }}

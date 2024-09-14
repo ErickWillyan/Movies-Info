@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MdOutlineArrowBackIos } from "react-icons/md";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import toast, { Toaster } from "react-hot-toast";
+import BackButton from "../../components/BackButton";
 
 export default function Favorites() {
   const [movies, setMovies] = useState([]);
@@ -12,7 +12,6 @@ export default function Favorites() {
     const response = localStorage.getItem("@favoritesMovies");
     setMovies(JSON.parse(response) || []);
   }, []);
-  console.log(movies);
 
   const handleNavigation = (id) => {
     navigate(`/movie/${id}`);
@@ -32,21 +31,9 @@ export default function Favorites() {
   if (movies.length === 0) {
     return (
       <>
-        <div
-          onClick={() => {
-            navigate("/");
-          }}
-          className=" flex hover:scale-105 duration-500 delay-200 ml-5 mt-5 py-2 w-[10rem] items-center cursor-pointer"
-        >
-          <p className="mr-2">
-            <MdOutlineArrowBackIos size={25} />
-          </p>
-          <p className="text-xl">Voltar</p>
-        </div>
-
         <div className=" relative flex w-[100%] h-[80vh] items-center justify-center ">
           <img
-            src="../../public/movieNotFound.svg"
+            src="/movieNotFound.svg"
             alt="not found movie"
             className="w-64 h-64 opacity-80"
           />
@@ -60,22 +47,9 @@ export default function Favorites() {
 
   return (
     <>
-      <div
-        onClick={() => {
-          navigate("/");
-        }}
-        className=" flex hover:scale-105 duration-500 delay-200 ml-5 mt-5 py-2 w-[10rem] items-center cursor-pointer"
-      >
-        <p className="mr-2">
-          <MdOutlineArrowBackIos size={25} />
-        </p>
-        <p className="text-xl">Voltar</p>
-      </div>
+      <BackButton route={"/"} />
 
       <div className="flex max-w-[1300px] justify-center w-90% flex-wrap mt-6 mr-auto ml-auto">
-        <div className="w-[90%]">
-          <p className="font-poppins text-xl mb-10 mt-10">Meus Filmes</p>
-        </div>
         {movies.map((item) => (
           <div
             key={item.id}

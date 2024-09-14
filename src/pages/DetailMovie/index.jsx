@@ -127,11 +127,11 @@ export default function DetailMovie() {
         />
         <div className="absolute w-full flex flex-wrap justify-between bg-gradient-to-tr h-full from-background from-10% items-center ">
           <div className=" w-[60rem] lg:w-[40rem]">
-            <p className=" font-poppins 2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-10 font-bold select-none">
+            <h1 className=" font-poppins 2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-10 font-bold select-none">
               {movie.title}
-            </p>
-            <p className=" font-poppins text-base mb-5 select-none ml-8">
-              {movie.overview}{" "}
+            </h1>
+            <p className="font-poppins text-base mb-5 select-none ml-8">
+              {movie.overview}
             </p>
             <div className="ml-8">
               <button

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
-import CardMovieDashboard from "../../components/cardMovieDashboard";
+import CardMovieDashboard from "../../components/CardMovieDashboard";
 import Header from "../../components/Header";
 
 export default function Dashboard() {
