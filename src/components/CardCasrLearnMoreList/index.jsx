@@ -1,6 +1,6 @@
 export default function CardCastLeanMoreList({ image, name, character }) {
   return (
-    <div>
+    <div className="flex flex-wrap justify-center hover:scale-105 cursor-pointer">
       {image ? (
         <img
           className="rounded-lg  w-40 h-60"
@@ -14,9 +14,9 @@ export default function CardCastLeanMoreList({ image, name, character }) {
           alt={name}
         />
       )}
-      <div className="w-40">
-        <p className="text-base font-bold ">{name}</p>
-        <p className="text-sm">( {character} )</p>
+      <div className="w-40 mt-2">
+        <p className="text-base font-bold  text-center ">{name}</p>
+        <p className="text-sm  text-center">{character}</p>
       </div>
     </div>
   );

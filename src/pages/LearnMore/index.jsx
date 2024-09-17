@@ -32,7 +32,7 @@ export default function LearnMore() {
         },
       });
 
-      setCast(credits.data.cast);
+      setCast(credits.data.cast.slice(0, 9));
       setCrew(credits.data.crew);
     }
     getCreditsMovie();
@@ -62,30 +62,37 @@ export default function LearnMore() {
         </div>
       </div>
       <Swiper
+        slidesPerView={7}
         spaceBetween={0}
-        breakpoints={{
-          768: {
-            slidesPerView: 8,
-          },
-          1000: {
-            slidesPerView: 8,
-          },
-          1200: {
-            slidesPerView: 8,
-            spaceBetween: 0,
-          },
-          1500: {
-            slidesPerView: 8,
-          },
-          1900: {
-            slidesPerView: 9,
-          },
-        }}
+        // breakpoints={{
+        //   768: {
+        //     slidesPerView: 8,
+        //   },
+        //   1000: {
+        //     slidesPerView: 8,
+        //   },
+        //   1200: {
+        //     slidesPerView: "auto",
+        //   },
+        //   1500: {
+        //     slidesPerView: "auto",
+        //   },
+        //   1900: {
+        //     slidesPerView: 9,
+        //   },
+        // }}
         modules={[Scrollbar]}
-        className=" w-[90%]"
+        scrollbar={{
+          hide: true,
+        }}
+        className="flex w-[80%] p-5 items-center"
+        style={{
+          "--swiper-scrollbar-bottom": "2px",
+          "--swiper-scrollbar-drag-bg-color": "#d3d3d3",
+        }}
       >
         {cast.map((item) => (
-          <SwiperSlide key={item.cast_id} className="mx-32">
+          <SwiperSlide key={item.cast_id} className="flex">
             <CardCastLeanMoreList
               name={item.name}
               image={item.profile_path}
@@ -93,6 +100,12 @@ export default function LearnMore() {
             />
           </SwiperSlide>
         ))}
+
+        <SwiperSlide className="flex h-70 w-40 ">
+          <button className="mt-[7rem] px-3 py-3 hover:scale-105">
+            <p className="text-white font-extrabold">Mostrar mais →</p>
+          </button>
+        </SwiperSlide>
       </Swiper>
     </>
   );
