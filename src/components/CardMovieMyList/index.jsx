@@ -9,7 +9,7 @@ export default function CardMovieMyList({ data }) {
   };
   return (
     <div
-      className="w-[10rem]  rounded-lg  mr-4 ml-4 mb-8 hover:scale-105 duration-500 delay-200"
+      className="w-[10rem]  rounded-lg cursor-pointer"
       onClick={handleNavigation}
     >
       <img className="rounded-lg" src={urlImage} alt={data.title} />

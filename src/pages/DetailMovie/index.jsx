@@ -1,7 +1,7 @@
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CertificationCard from "../../components/CertificationCard";
+import CertificationCard from "../../components/CertificationCardDetailMovie";
 import CardMovieMyList from "../../components/CardMovieMyList";
 import { Navigation, Pagination, Scrollbar, Zoom } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
@@ -71,10 +71,14 @@ export default function DetailMovie() {
   };
 
   const notifyAddMovie = () =>
-    toast.success(`${movie.title} adicionado a lista`);
+    toast.success(`${movie.title} adicionado a lista`, {
+      duration: 1500,
+    });
 
   const notifyRemoveMovie = () =>
-    toast.error(`${movie.title} removido da lista`);
+    toast.error(`${movie.title} removido da lista`, {
+      duration: 1500,
+    });
 
   const urlImage = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
   if (loading) {
@@ -160,7 +164,7 @@ export default function DetailMovie() {
           {<CertificationCard data={certification} />}
         </div>
       </div>
-      <div>
+      <div className="">
         <p className="text-lg ml-14 font-poppins">Minha Lista</p>
         <Swiper
           slidesPerView={1}
@@ -183,11 +187,11 @@ export default function DetailMovie() {
               spaceBetween: 0,
             },
             1900: {
-              slidesPerView: 7,
+              slidesPerView: 8,
               spaceBetween: 0,
             },
           }}
-          className=" flex pt-7 items-center h-[20rem]  mb-6"
+          className=" flex p-7 items-center h-[20rem]  mb-6"
           style={{
             "--swiper-navigation-color": "#fff",
             "--swiper-pagination-color": "#fff",

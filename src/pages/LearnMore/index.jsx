@@ -6,7 +6,7 @@ import { Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/scrollbar";
-import CardCastLeanMoreList from "../../components/CardCasrLearnMoreList";
+import CardCastLeanMoreList from "../../components/CardCastLearnMoreList";
 
 export default function LearnMore() {
   const [movie, setMovie] = useState({});
@@ -61,52 +61,39 @@ export default function LearnMore() {
           </p>
         </div>
       </div>
-      <Swiper
-        slidesPerView={7}
-        spaceBetween={0}
-        // breakpoints={{
-        //   768: {
-        //     slidesPerView: 8,
-        //   },
-        //   1000: {
-        //     slidesPerView: 8,
-        //   },
-        //   1200: {
-        //     slidesPerView: "auto",
-        //   },
-        //   1500: {
-        //     slidesPerView: "auto",
-        //   },
-        //   1900: {
-        //     slidesPerView: 9,
-        //   },
-        // }}
-        modules={[Scrollbar]}
-        scrollbar={{
-          hide: true,
-        }}
-        className="flex w-[80%] p-5 items-center"
-        style={{
-          "--swiper-scrollbar-bottom": "2px",
-          "--swiper-scrollbar-drag-bg-color": "#d3d3d3",
-        }}
-      >
-        {cast.map((item) => (
-          <SwiperSlide key={item.cast_id} className="flex">
-            <CardCastLeanMoreList
-              name={item.name}
-              image={item.profile_path}
-              character={item.character}
-            />
-          </SwiperSlide>
-        ))}
+      <div className="flex flex-wrap w-[80%] m-auto mb-5">
+        <p className="text-xl mb-4 select-none ">Elenco Principal</p>
+        <Swiper
+          slidesPerView={8}
+          spaceBetween={0}
+          modules={[Scrollbar]}
+          scrollbar={{
+            hide: true,
+          }}
+          className="flex p-5 items-center "
+          style={{
+            "--swiper-scrollbar-size": "6px",
+            "--swiper-scrollbar-bottom": "2px",
+            "--swiper-scrollbar-drag-bg-color": "#d3d3d3",
+          }}
+        >
+          {cast.map((item) => (
+            <SwiperSlide key={item.cast_id} className="flex">
+              <CardCastLeanMoreList
+                name={item.name}
+                image={item.profile_path}
+                character={item.character}
+              />
+            </SwiperSlide>
+          ))}
 
-        <SwiperSlide className="flex h-70 w-40 ">
-          <button className="mt-[7rem] px-3 py-3 hover:scale-105">
-            <p className="text-white font-extrabold">Mostrar mais →</p>
-          </button>
-        </SwiperSlide>
-      </Swiper>
+          <SwiperSlide>
+            <button className="mt-[7rem] px-3 py-3 ">
+              <p className="text-white font-extrabold">Mostrar mais →</p>
+            </button>
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </>
   );
 }
