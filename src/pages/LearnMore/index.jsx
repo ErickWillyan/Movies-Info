@@ -7,21 +7,40 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import CardCastLeanMoreList from "../../components/CardCastLearnMoreList";
+import CertificationCardLearnMore from "../../components/CertificationCardLearnMore";
+import Footer from "../../components/Footer";
 
 export default function LearnMore() {
   const [movie, setMovie] = useState({});
   const [crew, setCrew] = useState({});
   const [cast, setCast] = useState([]);
+  const [certification, setCertification] = useState({});
   const { id } = useParams();
   useEffect(() => {
     async function getDetailMovie() {
+      const certification = await api.get(`movie/${id}/release_dates`, {
+        params: {
+          api_key: "92a609de3abd6ca612a59c98882f521b",
+        },
+      });
+
       const movie = await api.get(`movie/${id}`, {
         params: {
           api_key: "92a609de3abd6ca612a59c98882f521b",
           language: "pt-BR",
         },
       });
+      try {
+        const classificacao_Indicativa = certification.data.results.find(
+          (result) => result.iso_3166_1 === "BR"
+        );
 
+        setCertification(
+          classificacao_Indicativa.release_dates[0].certification
+        );
+      } catch (error) {
+        setCertification({});
+      }
       setMovie(movie.data);
     }
     async function getCreditsMovie() {
@@ -59,6 +78,7 @@ export default function LearnMore() {
           <p className=" font-poppins text-base mb-5 select-none ml-8">
             {movie.overview}
           </p>
+          <CertificationCardLearnMore data={certification} />
         </div>
       </div>
       <div className="flex flex-wrap w-[80%] m-auto mb-5">
@@ -69,6 +89,7 @@ export default function LearnMore() {
           modules={[Scrollbar]}
           scrollbar={{
             hide: true,
+            draggable: true,
           }}
           className="flex p-5 items-center "
           style={{
@@ -94,6 +115,7 @@ export default function LearnMore() {
           </SwiperSlide>
         </Swiper>
       </div>
+      <Footer />
     </>
   );
 }

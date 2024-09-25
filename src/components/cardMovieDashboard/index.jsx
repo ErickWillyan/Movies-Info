@@ -9,7 +9,7 @@ export default function CardMovieDashboard({ data }) {
   };
   return (
     <div
-      className="group relative rounded-lg flex h-[17rem] w-48  mr-8 ml-8 mb-8 hover:scale-[1.01] duration-500 delay-200 "
+      className="group relative rounded-lg flex h-[15rem] w-[10rem]  mb-8 hover:scale-[1.01] duration-500 delay-200 select-none "
       onClick={handleNavigation}
     >
       <img

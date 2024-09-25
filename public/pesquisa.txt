@@ -1,0 +1,32 @@
+      ----------------------------- olhar este exemplo quando for desenvolver a função de pesquisa na dashboard -------------------------
+      
+{/* <main className=" justify-center w-full">
+        <div className="mt-5 w-[75%] mr-auto ml-auto ">
+          <select
+            className="text-xl bg-transparent outline-none "
+            onChange={handleSelectChange}
+          >
+            <option className="text-base bg-background" value="movie/popular">
+              Filmes Populares
+            </option>
+            <option
+              className="text-base bg-background"
+              value="movie/now_playing"
+            >
+              Em exibição
+            </option>
+            <option className="text-base bg-background" value="movie/upcoming">
+              Em breve
+            </option>
+            <option className="text-base bg-background" value="movie/top_rated">
+              Melhor Classificação
+            </option>
+          </select>
+        </div>
+        <div className="flex max-w-[1440px] justify-center w-90% flex-wrap mt-6 mr-auto ml-auto">
+          {movies.map((data) => {
+            return <CardMovieDashboard key={data.id} data={data} />;
+          })}
+        </div>
+      </main> */}
+

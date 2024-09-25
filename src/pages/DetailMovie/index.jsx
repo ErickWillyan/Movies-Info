@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Header from "../../components/Header";
 import toast, { Toaster } from "react-hot-toast";
+import Footer from "../../components/Footer";
 
 import "swiper/css";
 import "swiper/css/zoom";
@@ -72,12 +73,12 @@ export default function DetailMovie() {
 
   const notifyAddMovie = () =>
     toast.success(`${movie.title} adicionado a lista`, {
-      duration: 1500,
+      duration: 800,
     });
 
   const notifyRemoveMovie = () =>
     toast.error(`${movie.title} removido da lista`, {
-      duration: 1500,
+      duration: 800,
     });
 
   const urlImage = `https://image.tmdb.org/t/p/original/${movie.backdrop_path}`;
@@ -106,11 +107,6 @@ export default function DetailMovie() {
 
     let moviesSaved = JSON.parse(favoritesMovie) || [];
 
-    if (existMovie) {
-      alert("Este filme já foi salvo");
-      return;
-    }
-
     let newList = favoriteMovies.concat(movie);
 
     setFavoritesMovies(newList);
@@ -123,14 +119,14 @@ export default function DetailMovie() {
   return (
     <>
       <Header />
-      <div className="relative flex flex-wrap w-full  bg-slate-200">
+      <div className="relative flex flex-wrap w-full">
         <img
           src={urlImage}
           alt={movie.title}
           className="  2xl:h-[34rem] xl:h-[25rem] lg:h-[25rem] md:h-[20rem] w-full object-cover select-none"
         />
         <div className="absolute w-full flex flex-wrap justify-between bg-gradient-to-tr h-full from-background from-10% items-center ">
-          <div className=" w-[60rem] lg:w-[40rem]">
+          <div className=" w-[80rem]  lg:w-[60rem] ">
             <h1 className=" font-poppins 2xl:text-5xl md:text-3xl 2xl:mb-7 md:mb-3 ml-10 font-bold select-none">
               {movie.title}
             </h1>
@@ -164,7 +160,7 @@ export default function DetailMovie() {
           {<CertificationCard data={certification} />}
         </div>
       </div>
-      <div className="">
+      <div className="-mt-32">
         <p className="text-lg ml-14 font-poppins">Minha Lista</p>
         <Swiper
           slidesPerView={1}
@@ -208,6 +204,7 @@ export default function DetailMovie() {
         </Swiper>
       </div>
       <Toaster position="top-right" reverseOrder={false} />
+      <Footer />
     </>
   );
 }

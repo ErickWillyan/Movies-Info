@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import toast, { Toaster } from "react-hot-toast";
 import BackButton from "../../components/BackButton";
+import Footer from "../../components/Footer";
 
 export default function Favorites() {
   const [movies, setMovies] = useState([]);
@@ -79,6 +80,7 @@ export default function Favorites() {
         ))}
       </div>
       <Toaster position="top-right" reverseOrder={false} />
+      <Footer />
     </>
   );
 }
